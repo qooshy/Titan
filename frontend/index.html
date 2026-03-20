@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ymmo - Plateforme Immobilière</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">🏠 Ymmo</div>
+      <ul>
+        <li><a href="#properties">Biens</a></li>
+        <li><a href="#agencies">Agences</a></li>
+        <li><a href="#analytics">Analyses</a></li>
+        <li><a href="#login">Connexion</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="search">
+      <h1>Trouvez votre bien immobilier</h1>
+      <div class="search-bar">
+        <input type="text" id="city-input" placeholder="Ville...">
+        <input type="number" id="min-price" placeholder="Prix min">
+        <input type="number" id="max-price" placeholder="Prix max">
+        <button onclick="searchProperties()">Rechercher</button>
+      </div>
+    </section>
+
+    <section id="properties">
+      <h2>Biens disponibles</h2>
+      <div id="properties-grid" class="grid"></div>
+    </section>
+
+    <section id="analytics">
+      <h2>Analyses du marché</h2>
+      <div id="analytics-data"></div>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
