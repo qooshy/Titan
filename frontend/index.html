@@ -11,35 +11,116 @@
     <nav>
       <div class="logo">🏠 Ymmo</div>
       <ul>
-        <li><a href="#properties">Biens</a></li>
-        <li><a href="#agencies">Agences</a></li>
-        <li><a href="#analytics">Analyses</a></li>
-        <li><a href="#login">Connexion</a></li>
+        <li><a href="#" onclick="showSection('properties')">Biens</a></li>
+        <li><a href="#" onclick="showSection('agencies')">Agences</a></li>
+        <li><a href="#" onclick="showSection('analytics')">Analyses</a></li>
       </ul>
+      <div id="auth-area">
+        <button class="btn-outline" onclick="showSection('login')">Connexion</button>
+      </div>
     </nav>
   </header>
 
-  <main>
-    <section id="search">
-      <h1>Trouvez votre bien immobilier</h1>
-      <div class="search-bar">
-        <input type="text" id="city-input" placeholder="Ville...">
-        <input type="number" id="min-price" placeholder="Prix min">
-        <input type="number" id="max-price" placeholder="Prix max">
-        <button onclick="searchProperties()">Rechercher</button>
-      </div>
-    </section>
+  <!-- HERO -->
+  <section id="hero">
+    <h1>Trouvez votre bien immobilier</h1>
+    <p>12 agences partout en France — vente et achat résidentiel & professionnel</p>
+    <div class="search-bar">
+      <input type="text" id="city-input" placeholder="Ville (ex: Paris, Lyon...)">
+      <input type="number" id="min-price" placeholder="Prix min (€)">
+      <input type="number" id="max-price" placeholder="Prix max (€)">
+      <select id="type-filter">
+        <option value="">Tous types</option>
+        <option value="residential">Résidentiel</option>
+        <option value="professional">Professionnel</option>
+      </select>
+      <button onclick="searchProperties()">Rechercher</button>
+    </div>
+  </section>
 
-    <section id="properties">
+  <!-- BIENS -->
+  <section id="properties" class="section active">
+    <div class="section-header">
       <h2>Biens disponibles</h2>
-      <div id="properties-grid" class="grid"></div>
-    </section>
+      <span id="props-count"></span>
+    </div>
+    <div id="properties-grid" class="grid"></div>
+  </section>
 
-    <section id="analytics">
-      <h2>Analyses du marché</h2>
-      <div id="analytics-data"></div>
-    </section>
-  </main>
+  <!-- AGENCES -->
+  <section id="agencies" class="section">
+    <div class="section-header"><h2>Nos agences</h2></div>
+    <div id="agencies-grid" class="grid"></div>
+  </section>
+
+  <!-- ANALYTICS -->
+  <section id="analytics" class="section">
+    <div class="section-header"><h2>Analyses du marché</h2></div>
+    <div class="analytics-grid">
+      <div class="analytics-card">
+        <h3>Prix moyen par ville</h3>
+        <div id="price-by-city"></div>
+      </div>
+      <div class="analytics-card">
+        <h3>Villes les plus actives</h3>
+        <div id="popular-cities"></div>
+      </div>
+      <div class="analytics-card">
+        <h3>Estimateur de prix</h3>
+        <div class="estimator">
+          <input type="text" id="est-city" placeholder="Ville">
+          <input type="number" id="est-surface" placeholder="Surface (m²)">
+          <input type="number" id="est-rooms" placeholder="Nb pièces">
+          <button onclick="estimatePrice()">Estimer</button>
+          <div id="estimate-result"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGIN -->
+  <section id="login" class="section">
+    <div class="auth-container">
+      <div class="auth-box">
+        <h2>Connexion</h2>
+        <div id="login-error" class="error-msg" style="display:none"></div>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Mot de passe">
+        <button onclick="doLogin()">Se connecter</button>
+        <p class="auth-switch">Pas de compte ? <a href="#" onclick="showSection('register')">S'inscrire</a></p>
+        <div class="test-accounts">
+          <p>Comptes de test :</p>
+          <code>client1@gmail.com / client123</code><br>
+          <code>com1@ymmo.fr / com123</code><br>
+          <code>dir@ymmo.fr / dir123</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section id="register" class="section">
+    <div class="auth-container">
+      <div class="auth-box">
+        <h2>Créer un compte</h2>
+        <div id="register-error" class="error-msg" style="display:none"></div>
+        <div id="register-success" class="success-msg" style="display:none"></div>
+        <input type="text" id="reg-name" placeholder="Nom complet">
+        <input type="email" id="reg-email" placeholder="Email">
+        <input type="password" id="reg-password" placeholder="Mot de passe">
+        <button onclick="doRegister()">S'inscrire</button>
+        <p class="auth-switch">Déjà un compte ? <a href="#" onclick="showSection('login')">Se connecter</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL BIEN -->
+  <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
 
   <script src="js/app.js"></script>
 </body>
