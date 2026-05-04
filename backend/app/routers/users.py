@@ -5,13 +5,13 @@ from app.models.user import User
 from passlib.context import CryptContext
 
 router = APIRouter()
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["sha256_crypt"], deprecated="auto")
 
 @router.post("/register")
 def register(data: dict, db: Session = Depends(get_db)):
     existing = db.query(User).filter(User.email == data["email"]).first()
     if existing:
-        raise HTTPException(status_code=400, detail="Email already registered")
+        raise HTTPException(status_code=400, detail="Email deja utilise")
     user = User(
         email=data["email"],
         hashed_password=pwd_context.hash(data["password"]),
@@ -21,7 +21,14 @@ def register(data: dict, db: Session = Depends(get_db)):
     db.add(user)
     db.commit()
     db.refresh(user)
-    return {"id": user.id, "email": user.email, "role": user.role}
+    return {"id": user.id, "email": user.email, "role": user.role, "full_name": user.full_name}
+
+@router.post("/login")
+def login(data: dict, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.email == data["email"]).first()
+    if not user or not pwd_context.verify(data["password"], user.hashed_password):
+        raise HTTPException(status_code=401, detail="Email ou mot de passe incorrect")
+    return {"id": user.id, "email": user.email, "role": user.role, "full_name": user.full_name}
 
 @router.get("/{user_id}")
 def get_user(user_id: int, db: Session = Depends(get_db)):
