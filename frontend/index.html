@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ymmo - Plateforme Immobilière</title>
+  <title>Ymmo — Plateforme Immobilière</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
   <header>
     <nav>
-      <div class="logo">🏠 Ymmo</div>
+      <div class="logo">Ymmo<span>.</span></div>
       <ul>
         <li><a href="#" onclick="showSection('properties')">Biens</a></li>
         <li><a href="#" onclick="showSection('agencies')">Agences</a></li>
@@ -23,18 +24,21 @@
 
   <!-- HERO -->
   <section id="hero">
-    <h1>Trouvez votre bien immobilier</h1>
-    <p>12 agences partout en France — vente et achat résidentiel & professionnel</p>
-    <div class="search-bar">
-      <input type="text" id="city-input" placeholder="Ville (ex: Paris, Lyon...)">
-      <input type="number" id="min-price" placeholder="Prix min (€)">
-      <input type="number" id="max-price" placeholder="Prix max (€)">
-      <select id="type-filter">
-        <option value="">Tous types</option>
-        <option value="residential">Résidentiel</option>
-        <option value="professional">Professionnel</option>
-      </select>
-      <button onclick="searchProperties()">Rechercher</button>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Réseau national — 12 agences</p>
+      <h1>Trouvez votre bien<br><em>immobilier</em></h1>
+      <p>Vente et achat résidentiel &amp; professionnel partout en France.</p>
+      <div class="search-bar">
+        <input type="text" id="city-input" placeholder="Ville — Paris, Lyon, Marseille...">
+        <input type="number" id="min-price" placeholder="Prix min (€)">
+        <input type="number" id="max-price" placeholder="Prix max (€)">
+        <select id="type-filter">
+          <option value="">Tous types</option>
+          <option value="residential">Résidentiel</option>
+          <option value="professional">Professionnel</option>
+        </select>
+        <button onclick="searchProperties()">Rechercher</button>
+      </div>
     </div>
   </section>
 
@@ -70,7 +74,7 @@
         <div class="estimator">
           <input type="text" id="est-city" placeholder="Ville">
           <input type="number" id="est-surface" placeholder="Surface (m²)">
-          <input type="number" id="est-rooms" placeholder="Nb pièces">
+          <input type="number" id="est-rooms" placeholder="Nombre de pièces">
           <button onclick="estimatePrice()">Estimer</button>
           <div id="estimate-result"></div>
         </div>
@@ -84,14 +88,14 @@
       <div class="auth-box">
         <h2>Connexion</h2>
         <div id="login-error" class="error-msg" style="display:none"></div>
-        <input type="email" id="login-email" placeholder="Email">
+        <input type="email" id="login-email" placeholder="Adresse email">
         <input type="password" id="login-password" placeholder="Mot de passe">
         <button onclick="doLogin()">Se connecter</button>
         <p class="auth-switch">Pas de compte ? <a href="#" onclick="showSection('register')">S'inscrire</a></p>
         <div class="test-accounts">
-          <p>Comptes de test :</p>
-          <code>client1@gmail.com / client123</code><br>
-          <code>com1@ymmo.fr / com123</code><br>
+          <p>Comptes de test</p>
+          <code>client1@gmail.com / client123</code>
+          <code>com1@ymmo.fr / com123</code>
           <code>dir@ymmo.fr / dir123</code>
         </div>
       </div>
@@ -106,7 +110,7 @@
         <div id="register-error" class="error-msg" style="display:none"></div>
         <div id="register-success" class="success-msg" style="display:none"></div>
         <input type="text" id="reg-name" placeholder="Nom complet">
-        <input type="email" id="reg-email" placeholder="Email">
+        <input type="email" id="reg-email" placeholder="Adresse email">
         <input type="password" id="reg-password" placeholder="Mot de passe">
         <button onclick="doRegister()">S'inscrire</button>
         <p class="auth-switch">Déjà un compte ? <a href="#" onclick="showSection('login')">Se connecter</a></p>
@@ -117,7 +121,7 @@
   <!-- MODAL BIEN -->
   <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
     <div class="modal" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" onclick="closeModal()">&#x2715;</button>
       <div id="modal-content"></div>
     </div>
   </div>
